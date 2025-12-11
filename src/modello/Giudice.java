@@ -1,5 +1,7 @@
 package modello;
 
+import java.util.ArrayList;
+
 public class Giudice {
 
 	// VARIABILI STATICHE
@@ -52,6 +54,43 @@ public class Giudice {
 	    return target;
 	}
 	
+	
+	// Ritorna tutte le combinazione di caratteri in chars lunghe n
+	public static ArrayList<String> comb(int n, char[] chars2) {
+		ArrayList<String> temp, listStr;
+		if(n <= 0) {
+			ArrayList<String> res= new ArrayList<String>(); 
+			res.add("");
+			
+			return res;
+		}
+		else {
+			listStr = comb(-1, chars2);
+					
+			temp = new ArrayList<String>();
+			String newString;
+			for (char c: chars2) {
+				for (String str: listStr) {
+					newString = c+str;
+					temp.add(newString);
+				}
+			}
+			return temp;
+		}
+	}
+	
+	// Ritorna tutte le stringhe valide 
+	public static ArrayList<String> combValide(ArrayList<String> strs) {
+		ArrayList<String> valide = new ArrayList<String>();
+		
+		for(String str: strs) {
+			if(Giudice.valida(str)) {
+				valide.add(str);
+			}
+		}
+		
+		return valide;
+	}
 	
 	// Metodi ausiliari
 	private static boolean caratteriGiusti(String guess) {
