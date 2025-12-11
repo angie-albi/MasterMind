@@ -59,7 +59,7 @@ public class SmartComputer extends Computer {
 			int bulls = Giudice.numBulls(tnt.getGuess(), str);
 			int maggots =  Giudice.numMaggots(tnt.getGuess(), str);
 			
-			if(bulls != tnt.getNumBulls() && maggots != tnt.getNumMaggots()) {
+			if(bulls != tnt.getNumBulls() || maggots != tnt.getNumMaggots()) {
 				return false;
 			}
 		}
