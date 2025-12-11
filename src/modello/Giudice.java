@@ -65,7 +65,7 @@ public class Giudice {
 			return res;
 		}
 		else {
-			listStr = comb(-1, chars2);
+			listStr = comb(n-1, chars2);
 					
 			temp = new ArrayList<String>();
 			String newString;

@@ -33,33 +33,36 @@ public class SmartComputer extends Computer {
 	
 	@Override 
 	public String genGuess() {
-		for(Tentativo t: tentativi) {
-			if(!ckTargetTnts(t.getGuess())) {
-				targetPossibili.remove(t.getGuess());
+		ArrayList<String> targetsRemove = new ArrayList<>();
+		
+		for (String candidato : targetPossibili) {
+			if(!ckTargetTnts(candidato)) {
+				targetsRemove.add(candidato);
 			}
 		}
+		targetPossibili.removeAll(targetsRemove);
 		
-		String target;
-		do {
-			target = super.genCombinazioneCasuale();
-		} while(!targetPossibili.contains(target));
+		if (targetPossibili.isEmpty()) {
+	        System.out.println("Errore: nessun target possibile rimasto!");
+	        return null; 
+	    }
 		
-		return target;
+		int index = (int)(Math.random() * targetPossibili.size());
+	    String guess = targetPossibili.get(index);
+	    
+	    return guess;
 	}
 	
 	// Metodi ausiliari
 	private boolean ckTargetTnts(String str) {
-		int cont = 0;
 		for(Tentativo tnt: tentativi) {
-			if(Giudice.numBulls(tnt.getGuess(), str) == tnt.getNumBulls() &&
-			   Giudice.numMaggots(tnt.getGuess(), str) == tnt.getNumMaggots()) {
-				cont ++;
+			int bulls = Giudice.numBulls(tnt.getGuess(), str);
+			int maggots =  Giudice.numMaggots(tnt.getGuess(), str);
+			
+			if(bulls != tnt.getNumBulls() && maggots != tnt.getNumMaggots()) {
+				return false;
 			}
 		}
-		
-		if(cont == tentativi.size()) {
-			return true;
-		}
-		return false;
+		return true;
 	}
 }
