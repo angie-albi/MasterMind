@@ -31,7 +31,7 @@ public class Tentativo {
 	// Trasforma i valori in una Stringa
 	@Override
 	public String toString() {
-		return "[guess=" + guess + ", numBulls=" + numBulls + ", numMaggots=" + numMaggots + "]";
+		return "\n[guess=" + guess + ", numBulls=" + numBulls + ", numMaggots=" + numMaggots + "]";
 	}
 	
 	
