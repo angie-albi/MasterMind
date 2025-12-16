@@ -2,7 +2,9 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import modello.Giudice;
@@ -108,4 +110,18 @@ class GiudiceTest {
 		assertTrue(Giudice.valida(Giudice.genTarget()));
 	}
 
+	@Test
+	void testCombECombValide() {
+		ArrayList<String> tutteLeComb = Giudice.comb(Giudice.LUNGHEZZA, Giudice.CHARS);
+		assertEquals(10000, tutteLeComb.size());
+		
+		HashSet<String> setComb = new HashSet<>(tutteLeComb);
+		assertEquals(tutteLeComb.size(), setComb.size());
+
+		ArrayList<String> valide = Giudice.combValide(tutteLeComb);
+		assertEquals(5040, valide.size());
+		
+		HashSet<String> setValide = new HashSet<>(valide);
+		assertEquals(valide.size(), setValide.size());
+	}
 }
